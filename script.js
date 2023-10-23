@@ -1,57 +1,27 @@
-function validation()
-{
-    if(document.Formfill.Username.value=="")
-    {
-        document.getElementById("result").innerHTML="Enter Username";
-        return false;
+let screen = document.getElementById("display");
+buttons = document.querySelectorAll("button");
+let screenValue = "";
+for (item of buttons) {
+  item.addEventListener("click", (e) => {
+    buttonText = e.target.innerText;
+    if (buttonText == "X") {
+      buttonText = "*";
+      screenValue += buttonText;
+      screen.value = screenValue;
+    } else if (buttonText == "C") {
+      screenValue = "";
+      screen.value = screenValue;
+    } else if (buttonText == "=") {
+      var result;
+      try {
+        result = eval(screenValue);
+      } catch (error) {
+        result = "Expression error";
+      }
+      screen.value = result;
+    } else {
+      screenValue += buttonText;
+      screen.value = screenValue;
     }
-    else if(document.Formfill.Username.value.length<=6)
-    {
-        document.getElementById("result").innerHTML="Username is At least six letters";
-        return false;
-    }
-    else if(document.Formfill.Email.value=="")
-    {
-        document.getElementById("result").innerHTML="Enter your Email";
-        return false;
-    }
-    else if(document.Formfill.number.value.length<10)
-    {
-        document.getElementById("result").innerHTML="Phone number is At least ten digits";
-        return false;
-    }
-    else if(document.Formfill.password.value=="")
-    {
-        document.getElementById("result").innerHTML="Enter your Password";
-        return false;
-    }
-    else if(document.Formfill.password.value.length<6)
-    {
-        document.getElementById("result").innerHTML='Password must be 6-digits';
-        return false;
-    }
-    else if(document.Formfill.cpassword.value=="")
-    {
-        document.getElementById("result").innerHTML="Enter Confirm Password";
-        return false;
-    }
-    else if(document.Formfill.cpassword.value!=document.Formfill.password.value)
-    {
-        document.getElementById("result").innerHTML="Password doesn't matched";
-        return false;
-    }
-    else if(document.Formfill.password.value==document.Formfill.cpassword.value)
-    {
-        popup.classList.add('open-slide');
-
-        return false;
-    }
-
-
-
-}
-var popup=document.getElementById('popup');
-function closeslide()
-{
-    popup.classList.remove('open-slide')
+  });
 }
